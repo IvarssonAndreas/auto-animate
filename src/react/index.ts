@@ -16,16 +16,16 @@ export function useAutoAnimate<T extends Element>(
   const [controller, setController] = useState<
     AnimationController | undefined
   >()
+
   const element = useCallback(
     (node: T) => {
-      if (node instanceof HTMLElement) {
+      if (controller && node instanceof HTMLElement) {
         setController(autoAnimate(node, options))
-      } else {
-        setController(undefined)
       }
     },
     [options]
   )
+
   const setEnabled = useCallback(
     (enabled: boolean) => {
       if (controller) {
